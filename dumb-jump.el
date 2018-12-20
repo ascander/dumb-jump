@@ -1215,7 +1215,39 @@ or most optimal searcher."
     (:type "type" :supports ("ag" "grep" "git-grep") :language "fsharp"
 	   :regex "type\\s+JJJ\\b.*\\\="
 	   :tests ("type test = 1234")
-	   :not ("type testnot = 1234")))
+	   :not ("type testnot = 1234"))
+
+    ;; kotlin
+    (:type "variable" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
+           :regex "\\bval\\s*JJJ\\s*=[^=\\n]+"
+           :tests ("val test = 1234")
+           :not ("case test => 1234"))
+
+    (:type "variable" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
+           :regex "\\bvar\\s*JJJ\\s*=[^=\\n]+"
+           :tests ("var test = 1234")
+           :not ("case test => 1234"))
+
+    (:type "variable" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
+           :regex "\\btypealias\\s*JJJ\\s*=[^=\\n]+"
+           :tests ("typealias test = 1234")
+           :not ("case test => 1234"))
+
+    (:type "function" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
+           :regex "\\bfun\\s*JJJ\\s*\\\("
+           :tests ("fun test(asdf)" "fun test()" "fun <T> MutableList<T>.test()"))
+
+    (:type "type" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
+           :regex "class\\s*JJJ\\s*\\\(?"
+           :tests ("class test(object)"))
+
+    (:type "type" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
+           :regex "interface\\s*JJJ\\s*\\\(?"
+           :tests ("interface test(object)"))
+
+    (:type "type" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
+           :regex "object\\s*JJJ\\s*\\\(?"
+           :tests ("object test(object)")))
 
 
   "List of regex patttern templates organized by language and type to use for generating the grep command."
@@ -1288,6 +1320,8 @@ or most optimal searcher."
     (:language "javascript" :ext "vue" :agtype "js" :rgtype "js")
     (:language "javascript" :ext "html" :agtype "html" :rgtype "html")
     (:language "javascript" :ext "css" :agtype "css" :rgtype "css")
+    (:language "kotlin" :ext "kt" :agtype "kotlin" :rgtype "kotlin")
+    (:language "kotlin" :ext "kts" :agtype nil :rgtype "kotlin")
     (:language "lisp" :ext "lisp" :agtype "lisp" :rgtype "lisp")
     (:language "lisp" :ext "lsp" :agtype "lisp" :rgtype "lisp")
     (:language "lua" :ext "lua" :agtype "lua" :rgtype "lua")
@@ -1946,7 +1980,8 @@ current file."
     (:comment "//" :language "systemverilog")
     (:comment "--" :language "vhdl")
     (:comment "//" :language "scss")
-    (:comment "//" :language "pascal"))
+    (:comment "//" :language "pascal")
+    (:comment "//" :language "kotlin"))
   "List of one-line comments organized by language."
   :group 'dumb-jump
   :type
