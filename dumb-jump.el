@@ -1235,7 +1235,11 @@ or most optimal searcher."
 
     (:type "function" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
            :regex "\\bfun\\s*JJJ\\s*\\\("
-           :tests ("fun test(asdf)" "fun test()" "fun <T> MutableList<T>.test()"))
+           :tests ("fun test(asdf)" "fun test()"))
+
+    (:type "function" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
+           :regex "\\bfun\\s*((<\\w+>\\s+)?\\w+(<\\w+>)?\\.)?JJJ\\s*\\\("
+           :tests ("fun test(asdf)" "fun test()" "fun string.test()" "fun <t> mutablelist<t>.test()"))
 
     (:type "type" :supports ("ag" "grep" "rg" "git-grep") :language "kotlin"
            :regex "class\\s*JJJ\\s*\\\(?"
